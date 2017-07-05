@@ -11,6 +11,16 @@ if(isset($_POST['message'])) {
 	array_push($_SESSION['messages'], $msg);
 }
 
+// Create connection
+$conn = mysqli_connect("localhost", "ViktorijaG", "kashtankai15");
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+echo "Connected successfully";
+
+
 ?>
 
 <!DOCTYPE html>
