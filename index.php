@@ -12,14 +12,25 @@ if(isset($_POST['message'])) {
 }
 
 // Create connection
-$conn = mysqli_connect("localhost", "ViktorijaG", "kashtankai15");
+$conn = mysqli_connect("localhost", "ViktorijaG", "kashtankai15", "viktorijag"); // domenas, vardas, slaptazodis, lentele
 
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-echo "Connected successfully";
 
+$sql = "SELECT * FROM messages";
+$result = mysqli_query($conn, $sql);
+
+
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        print_r($row);
+    }
+    } else {
+    	echo "0 results";
+    }
 
 ?>
 
