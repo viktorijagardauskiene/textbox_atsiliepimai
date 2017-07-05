@@ -22,11 +22,12 @@ if (!$conn) {
 $sql = "SELECT * FROM messages";
 $result = mysqli_query($conn, $sql);
 
+$db_messages = [];
 
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        print_r($row);
+    	array_push($db_messages, $row);
     }
     } else {
     	echo "0 results";
@@ -49,13 +50,14 @@ if (mysqli_num_rows($result) > 0) {
 	</div>
 	<div class="row">
 		<div class="col-md-12">
+			
 			<?php 
 			
-			foreach ($_SESSION['messages'] as $entry) {
-				echo '<div class="card"><div class="card-block">'.$entry['date'].': '.$entry['message'].'</div></div><br />';
-			}
-			
+			foreach ($db_messages as $message) {
+				echo '<div class="card"><div class="card-block">['.$message["id"].'] '.$message["time"].$message["body"].'</div></div><br />';
+							}	
 			?>
+			
 		</div>
 	</div>
 	<div class="row">
