@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set("Europe/Vilnius");
+
 session_start();
 if (!isset($_SESSION['messages'])) {
 $_SESSION['messages'] = [];
@@ -26,11 +28,10 @@ array_push($_SESSION['messages'], $_POST['message']);
 	<div class="row">
 		<div class="col-md-12">
 			<?php 
+			echo date("Y-m-d H:i:s");
+
 			foreach ($_SESSION['messages'] as $message) {
-				echo '<div class="card">
-				  <div class="card-block">'.$message .
-				  '</div>
-					</div><br />';
+				echo '<div class="card"><div class="card-block">'.$message.'</div></div><br />';
 			}
 			
 			?>
