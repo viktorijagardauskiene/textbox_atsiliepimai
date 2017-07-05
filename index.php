@@ -5,7 +5,7 @@ $_SESSION['messages'] = [];
 }
 
 if(isset($_POST['message'])) {
-$_post
+array_push($_SESSION['messages'], $_POST['message']);
 }
 
 ?>
@@ -25,7 +25,15 @@ $_post
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<?php print_r($_SESSION['message'])?>
+			<?php 
+			foreach ($_SESSION['messages'] as $message) {
+				echo '<div class="card">
+				  <div class="card-block">'.$message .
+				  '</div>
+					</div><br />';
+			}
+			
+			?>
 		</div>
 	</div>
 	<div class="row">
