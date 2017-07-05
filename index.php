@@ -90,4 +90,6 @@ if (mysqli_num_rows($result) > 0) {
 </body>
 </html>
 
-<!-- heidiSQL - patogesne duombaze nei mySQL
+<!-- heidiSQL - patogesne duombaze nei mySQL -->
+<!-- namu darbai: db "eshop" lentele "products" - id, name, brand, price, weight, description...
+pavaizduoti lentele ir forma su ivedamais laikais ir mygtuku
