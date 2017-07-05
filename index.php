@@ -7,7 +7,8 @@ $_SESSION['messages'] = [];
 }
 
 if(isset($_POST['message'])) {
-array_push($_SESSION['messages'], $_POST['message']);
+	$msg = ['date' => date("Y-m-d H:i:s"), 'message' => $_POST['message']];
+	array_push($_SESSION['messages'], $msg);
 }
 
 ?>
@@ -28,10 +29,9 @@ array_push($_SESSION['messages'], $_POST['message']);
 	<div class="row">
 		<div class="col-md-12">
 			<?php 
-			echo date("Y-m-d H:i:s");
-
-			foreach ($_SESSION['messages'] as $message) {
-				echo '<div class="card"><div class="card-block">'.$message.'</div></div><br />';
+			
+			foreach ($_SESSION['messages'] as $entry) {
+				echo '<div class="card"><div class="card-block">'.$entry['date'].': '.$entry['message'].'</div></div><br />';
 			}
 			
 			?>
@@ -51,7 +51,7 @@ array_push($_SESSION['messages'], $_POST['message']);
 	</div>
 
 </div>
-
+<pre><?php print_r($_SESSION['messages']) ?></pre>
 
 </body>
 </html>
