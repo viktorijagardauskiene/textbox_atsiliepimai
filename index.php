@@ -1,16 +1,6 @@
 <?php
 date_default_timezone_set("Europe/Vilnius");
 
-session_start();
-if (!isset($_SESSION['messages'])) {
-$_SESSION['messages'] = [];
-}
-
-if(isset($_POST['message'])) {
-	$msg = ['date' => date("Y-m-d H:i:s"), 'message' => $_POST['message']];
-	array_push($_SESSION['messages'], $msg);
-}
-
 // Create connection
 $conn = mysqli_connect("localhost", "ViktorijaG", "kashtankai15", "viktorijag"); // domenas, vardas, slaptazodis, lentele
 
@@ -19,7 +9,23 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM messages";
+
+if(isset($_POST['message'])) { // paslinkom koda uz connection prie db
+	$sql = "INSERT INTO messages(body) VALUES ('".$_POST['message']."')";
+	// $sql = "INSERT INTO lent_pav (stulp_pav, stulp_pav) VALUES ('John', 'Doe', 'john@example.com')";
+
+
+	if (mysqli_query($conn, $sql)) {
+	    echo "<div class='alert alert-success' role='alert'>
+  <strong>Well done!</strong> New record created successfully.
+</div>;";
+	} else {
+	    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+	}
+}
+
+
+$sql = "SELECT * FROM messages"; // where user = "kazkoks", isfiltruos duomenis pagal user nurodytu vardu
 $result = mysqli_query($conn, $sql);
 
 $db_messages = [];
@@ -54,7 +60,7 @@ if (mysqli_num_rows($result) > 0) {
 			<?php 
 			
 			foreach ($db_messages as $message) {
-				echo '<div class="card"><div class="card-block">['.$message["id"].'] '.$message["time"].$message["body"].'</div></div><br />';
+				echo '<div class="card"><div class="card-block">['.$message["id"].'] '.$message["time"]." ".$message["body"]." " .'</div></div><br />';
 							}	
 			?>
 			
@@ -74,7 +80,7 @@ if (mysqli_num_rows($result) > 0) {
 	</div>
 
 </div>
-<pre><?php print_r($_SESSION['messages']) ?></pre>
+
 
 </body>
 </html>
