@@ -88,3 +88,5 @@ if (mysqli_num_rows($result) > 0) {
 
 </body>
 </html>
+
+<!-- heidiSQL - patogesne duombaze nei mySQL
